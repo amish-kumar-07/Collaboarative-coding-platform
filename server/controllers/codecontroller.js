@@ -7,7 +7,6 @@ const { codexecutr } = require('../services/codexecutr');
 body = { code: "console.log(x)", lang: "js", input: "x" }
 
 const handleCodeExecution = async (req, res) => {
-    // Extract the necessary values from the request body
     const { code, lang, input } = req.body;
     try {
         output = await codexecutr(code, lang, input);
