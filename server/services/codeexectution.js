@@ -32,7 +32,7 @@ const codexecution = async (code, language_id, questionid) => {
         headers: {
           "Content-Type": "application/json",
           "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
-          "X-RapidAPI-Key": "your-rapidapi-key-here", // Replace with your API key
+          "X-RapidAPI-Key": "a735b7febamsh1c15929d46ea261p1d0159jsn543e1d05f9f4", // Replace with your API key
         },
       }
     );
@@ -50,7 +50,7 @@ const checkStatus = async (token) => {
       {
         headers: {
           "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
-          "X-RapidAPI-Key": "your-rapidapi-key-here", // Replace with your API key
+          "X-RapidAPI-Key": "a735b7febamsh1c15929d46ea261p1d0159jsn543e1d05f9f4", // Replace with your API key
         },
       }
     );
