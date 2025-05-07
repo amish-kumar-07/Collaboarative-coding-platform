@@ -1,23 +1,30 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const http = require("http");
+const socketHandler = require("./socketHandler");
 
-const { initSocket } = require("./socket/socketHandler");
 const { codexecution, checkStatus } = require("./services/codeexectution");
 
 const app = express();
 const port = 3000;
+const server = http.createServer(app);
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST"]
+}));
 
 
-const server = app.listen(3001, () => {
-  console.log("Server is running at http://localhost:3001 for WebSockets");
+// Start socket handler
+socketHandler(server);
+
+const PORT = 3001;
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-console.log(initSocket);  // Should log a function definition if imported correctly
-initSocket(server);
 
 
 app.post("/submit", async (req, res) => {
