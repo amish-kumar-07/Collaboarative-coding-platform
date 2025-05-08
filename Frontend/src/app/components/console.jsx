@@ -1,26 +1,39 @@
-import React, { useEffect, useState } from "react";
+'use client';
+import React from "react";
 
 export function OutputConsole({ status }) {
-  const [message, setMessage] = useState(null);
+  // If no status exists yet, render an empty div or a placeholder
+  if (!status) {
+    return (
+      <div className="mt-2 p-2 text-gray-500 text-sm">
+        Run your code to see results
+      </div>
+    );
+  }
 
-  useEffect(() => {
-    // Check the status whenever it changes
-    if (status.description == "Accepted") {
-      setMessage( "✅ Code Accepted!");
-    }
-    if(status.description == "Processing"){
-        setMessage( "✅ in process!");
-    }
-  }, [status]); // Re-run the effect when 'status' changes
-
-  if (!message) return null;
+  // Safe access to description with fallback
+  const description = status?.description || "Unknown status";
+  
+  // Determine styling based on status
+  let message;
+  let bgColorClass;
+  
+  switch (description) {
+    case "Accepted":
+      message = "✅ Code Accepted!";
+      bgColorClass = "bg-green-600";
+      break;
+    case "Processing":
+      message = "⏳ Processing...";
+      bgColorClass = "bg-yellow-600";
+      break;
+    default:
+      message = `❌ ${description}`;
+      bgColorClass = "bg-red-600";
+  }
 
   return (
-    <div
-      className={`mt-2 p-2 rounded text-white text-sm font-semibold ${
-        status === "accepted" ? "bg-green-600" : "bg-red-600"
-      }`}
-    >
+    <div className={`mt-2 p-2 rounded text-white text-sm font-semibold ${bgColorClass}`}>
       {message}
     </div>
   );

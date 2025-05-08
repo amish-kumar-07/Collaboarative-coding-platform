@@ -1,3 +1,5 @@
+'use client';
+
 export const QuestionDisplay = ({ id }) => {
     const questions = [
       { id: 1, title: "Sum of Two Numbers", description: "Write a function that returns the sum of two numbers.", input: "3 5", output: "8" },

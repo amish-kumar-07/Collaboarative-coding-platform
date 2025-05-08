@@ -10,25 +10,22 @@ export const handlerun = async (ques_id) => {
 
   if (!code || !lang) {
     console.log("❌ Error: Code or language is missing in sessionStorage");
-    return { error: 'Code or language is missing in sessionStorage' };
+    return { description: "Missing code or language" };
   }
 
-  let language_id = 71; // Default to Python 3
-
+  let language_id;
   if (lang === 'python') {
     language_id = 71;
   } else if (lang === 'javascript') {
     language_id = 63;
-  }
-
-  if (!language_id) {
+  } else {
     console.log("❌ Error: Unsupported language");
-    return { error: 'Unsupported language' };
+    return { description: "Unsupported language" };
   }
 
   const requestData = {
     code,
-    language_id: parseInt(language_id),
+    language_id,
     questionid: parseInt(ques_id),
   };
 
@@ -41,15 +38,15 @@ export const handlerun = async (ques_id) => {
       body: JSON.stringify(requestData),
     });
 
-    if (!res.ok) {
-      throw new Error("Failed to connect to backend");
-    }
+    if (!res.ok) throw new Error("Failed to connect to backend");
 
     const data = await res.json();
     console.log("✅ Backend response received:", data);
-    return data;
+
+    // Return just the status object with the description
+    return data.judgeResult?.status || { description: "Unknown error" };
   } catch (error) {
     console.log("❌ Error in handlerun function:", error);
-    return { error: 'Failed to reach the backend' };
+    return { description: "Execution failed" };
   }
 };
