@@ -32,7 +32,7 @@ export const handlerun = async (ques_id) => {
   console.log("📦 Request data prepared:", requestData);
 
   try {
-    const res = await fetch('http://localhost:3001/submit', {
+    const res = await fetch('http://localhost:3000/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestData),
