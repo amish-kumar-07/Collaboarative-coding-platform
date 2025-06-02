@@ -1,13 +1,27 @@
 'use client';
+<<<<<<< HEAD
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+=======
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import socket from '../socket';
+>>>>>>> upstream/main
 import { Code, Users, ArrowRight, Hash, User, RefreshCw, Server } from 'lucide-react';
 
 export default function Page() {
   const [userName, setUserName] = useState('');
   const [roomId, setRoomId] = useState('');
+<<<<<<< HEAD
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  // Handle joining a room
+  const handleJoinRoom = () => {
+    setError('');
+
+=======
   const [isGeneratingRoom, setIsGeneratingRoom] = useState(false);
   const [socketStatus, setSocketStatus] = useState('disconnected'); // 'disconnected', 'connecting', 'connected'
   const [error, setError] = useState('');
@@ -90,16 +104,33 @@ export default function Page() {
     setError('');
     
     // Validate inputs
+>>>>>>> upstream/main
     if (!userName.trim()) {
       setError('Please enter your name');
       return;
     }
+<<<<<<< HEAD
+
+=======
     
+>>>>>>> upstream/main
     if (!roomId.trim()) {
       setError('Please enter a room ID or generate one');
       return;
     }
     
+<<<<<<< HEAD
+    // Store in component state instead of localStorage
+    // These values would be passed to the room page via router state or URL params
+    // For now, we'll just navigate
+    router.push(`/room/${roomId.trim()}`);
+  };
+
+  // Generate random room ID
+  const generateRoomId = () => {
+    const id = Math.random().toString(36).substring(2, 8).toUpperCase();
+    setRoomId(id);
+=======
     // Connect socket if not connected
     if (!socket.connected) {
       setSocketStatus('connecting');
@@ -111,6 +142,7 @@ export default function Page() {
       Name: userName.trim(), 
       roomId: roomId.trim() 
     });
+>>>>>>> upstream/main
   };
 
   return (
@@ -123,7 +155,11 @@ export default function Page() {
         </div>
         <p className="text-gray-400">Collaborative coding and video interviews</p>
       </div>
+<<<<<<< HEAD
+
+=======
       
+>>>>>>> upstream/main
       {/* Join Form */}
       <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg overflow-hidden">
         <div className="bg-gray-700 px-6 py-4 border-b border-gray-600">
@@ -132,6 +168,10 @@ export default function Page() {
             Join a Coding Room
           </h2>
         </div>
+<<<<<<< HEAD
+
+        <div className="p-6 space-y-4">
+=======
         
         <div className="p-6 space-y-4">
           {/* Server Status */}
@@ -150,12 +190,17 @@ export default function Page() {
                 : 'Not connected to server'}
           </div>
 
+>>>>>>> upstream/main
           {error && (
             <div className="bg-red-900/30 border border-red-800 text-red-300 px-4 py-2 rounded text-sm">
               {error}
             </div>
           )}
+<<<<<<< HEAD
+
+=======
           
+>>>>>>> upstream/main
           {/* Name Input */}
           <div className="space-y-2">
             <label htmlFor="userName" className="block text-sm font-medium text-gray-300">
@@ -176,7 +221,11 @@ export default function Page() {
               />
             </div>
           </div>
+<<<<<<< HEAD
+
+=======
           
+>>>>>>> upstream/main
           {/* Room ID Input */}
           <div className="space-y-2">
             <label htmlFor="roomId" className="block text-sm font-medium text-gray-300">
@@ -198,18 +247,39 @@ export default function Page() {
                 />
               </div>
               <button
+<<<<<<< HEAD
+                onClick={generateRoomId}
+                className="px-3 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded transition-colors"
+                title="Generate Room ID"
+              >
+                <RefreshCw size={16} />
+=======
                 type="button"
                 onClick={generateRandomRoomId}
                 className="bg-gray-700 hover:bg-gray-600 text-gray-300 p-2 rounded border border-gray-600 transition-colors"
                 title="Generate random room ID"
               >
                 <RefreshCw size={16} className={isGeneratingRoom ? 'animate-spin' : ''} />
+>>>>>>> upstream/main
               </button>
             </div>
             <p className="text-gray-500 text-xs">
               Enter an existing room ID or generate a new one to create a room
             </p>
           </div>
+<<<<<<< HEAD
+
+          {/* Join Button */}
+          <button
+            onClick={handleJoinRoom}
+            className="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition-colors font-medium"
+          >
+            Join Room
+            <ArrowRight size={16} className="ml-2" />
+          </button>
+        </div>
+      </div>
+=======
           
           {/* Join Button */}
           <button
@@ -264,6 +334,7 @@ export default function Page() {
           <p className="text-gray-400 text-sm">Practice with coding challenges similar to technical interviews</p>
         </div>
       </div>
+>>>>>>> upstream/main
     </div>
   );
 }
